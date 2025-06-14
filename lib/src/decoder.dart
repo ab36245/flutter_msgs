@@ -27,6 +27,10 @@ class _ObjectDecoder implements ModelObjectDecoder {
     _decodeInt(_mp);
   
   @override
+  ModelMapDecoder getMap(String name) =>
+    _decodeMap(_mp);
+  
+  @override
   ModelObjectDecoder getObject(String name) =>
     _decodeObject(_mp);
   
@@ -61,6 +65,52 @@ class _ArrayDecoder implements ModelArrayDecoder {
     _decodeInt(_mp);
   
   @override
+  ModelMapDecoder getMap() =>
+    _decodeMap(_mp);
+  
+  @override
+  ModelObjectDecoder getObject() =>
+    _decodeObject(_mp);
+  
+  @override
+  ModelRef getRef() =>
+    _decodeRef(_mp);
+  
+  @override
+  String getString() =>
+    _decodeString(_mp);
+
+  final MsgPackDecoder _mp;
+}
+
+class _MapDecoder implements ModelMapDecoder {
+  _MapDecoder(this._mp) :
+    length = _mp.getArrayLength();
+
+  @override
+  final int length;
+  
+  @override
+  ModelArrayDecoder getArray() =>
+    _decodeArray(_mp);
+  
+  @override
+  DateTime getDate() =>
+    _decodeDate(_mp);
+  
+  @override
+  int getInt() =>
+    _decodeInt(_mp);
+  
+  @override
+  String getKey() =>
+    _decodeString(_mp);
+  
+  @override
+  ModelMapDecoder getMap() =>
+    _decodeMap(_mp);
+  
+  @override
   ModelObjectDecoder getObject() =>
     _decodeObject(_mp);
   
@@ -83,6 +133,9 @@ DateTime _decodeDate(MsgPackDecoder mp) =>
 
 int _decodeInt(MsgPackDecoder mp) =>
   mp.getInt();
+
+_MapDecoder _decodeMap(MsgPackDecoder mp) =>
+  _MapDecoder(mp);
 
 _ObjectDecoder _decodeObject(MsgPackDecoder mp) =>
   _ObjectDecoder(mp);

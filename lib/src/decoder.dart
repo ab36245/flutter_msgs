@@ -1,147 +1,17 @@
 import 'dart:typed_data';
 
-import 'package:flutter_model/flutter_model.dart';
 import 'package:flutter_msgpack/flutter_msgpack.dart';
 
-class MsgDecoder extends _ObjectDecoder {
-  MsgDecoder(Uint8List b) : super(MsgPackDecoder(b)) {
-    id = _mp.getInt();
+import 'decoders/object.dart';
+
+class MsgDecoder extends ObjectDecoder {
+  factory MsgDecoder(Uint8List b) {
+    final mp = MsgPackDecoder(b);
+    final id = mp.getInt();
+    return MsgDecoder._(id, mp);
   }
 
-  late final int id;
+  MsgDecoder._(this.id, super._mp);
+
+  final int id;
 }
-
-class _ObjectDecoder implements ModelObjectDecoder {
-  _ObjectDecoder(this._mp);
-  
-  @override
-  ModelArrayDecoder getArray(String name) =>
-    _decodeArray(_mp);
-  
-  @override
-  DateTime getDate(String name) =>
-    _decodeDate(_mp);
-  
-  @override
-  int getInt(String name) =>
-    _decodeInt(_mp);
-  
-  @override
-  ModelMapDecoder getMap(String name) =>
-    _decodeMap(_mp);
-  
-  @override
-  ModelObjectDecoder getObject(String name) =>
-    _decodeObject(_mp);
-  
-  @override
-  ModelRef getRef(String name) =>
-    _decodeRef(_mp);
-  
-  @override
-  String getString(String name) =>
-    _decodeString(_mp);
-
-  final MsgPackDecoder _mp;
-}
-
-class _ArrayDecoder implements ModelArrayDecoder {
-  _ArrayDecoder(this._mp) :
-    length = _mp.getArrayLength();
-
-  @override
-  final int length;
-  
-  @override
-  ModelArrayDecoder getArray() =>
-    _decodeArray(_mp);
-  
-  @override
-  DateTime getDate() =>
-    _decodeDate(_mp);
-  
-  @override
-  int getInt() =>
-    _decodeInt(_mp);
-  
-  @override
-  ModelMapDecoder getMap() =>
-    _decodeMap(_mp);
-  
-  @override
-  ModelObjectDecoder getObject() =>
-    _decodeObject(_mp);
-  
-  @override
-  ModelRef getRef() =>
-    _decodeRef(_mp);
-  
-  @override
-  String getString() =>
-    _decodeString(_mp);
-
-  final MsgPackDecoder _mp;
-}
-
-class _MapDecoder implements ModelMapDecoder {
-  _MapDecoder(this._mp) :
-    length = _mp.getArrayLength();
-
-  @override
-  final int length;
-  
-  @override
-  ModelArrayDecoder getArray() =>
-    _decodeArray(_mp);
-  
-  @override
-  DateTime getDate() =>
-    _decodeDate(_mp);
-  
-  @override
-  int getInt() =>
-    _decodeInt(_mp);
-  
-  @override
-  String getKey() =>
-    _decodeString(_mp);
-  
-  @override
-  ModelMapDecoder getMap() =>
-    _decodeMap(_mp);
-  
-  @override
-  ModelObjectDecoder getObject() =>
-    _decodeObject(_mp);
-  
-  @override
-  ModelRef getRef() =>
-    _decodeRef(_mp);
-  
-  @override
-  String getString() =>
-    _decodeString(_mp);
-
-  final MsgPackDecoder _mp;
-}
-
-_ArrayDecoder _decodeArray(MsgPackDecoder mp) =>
-  _ArrayDecoder(mp);
-
-DateTime _decodeDate(MsgPackDecoder mp) =>
-  mp.getTime();
-
-int _decodeInt(MsgPackDecoder mp) =>
-  mp.getInt();
-
-_MapDecoder _decodeMap(MsgPackDecoder mp) =>
-  _MapDecoder(mp);
-
-_ObjectDecoder _decodeObject(MsgPackDecoder mp) =>
-  _ObjectDecoder(mp);
-
-ModelRef _decodeRef(MsgPackDecoder mp) =>
-  ModelRef(mp.getString());
-
-String _decodeString(MsgPackDecoder mp) =>
-  mp.getString();

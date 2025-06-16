@@ -4,13 +4,16 @@ import 'package:flutter_msgpack/flutter_msgpack.dart';
 import 'encode.dart';
 
 class ArrayEncoder implements ModelArrayEncoder {
-  ArrayEncoder(this._mp, int length) {
+  ArrayEncoder(this._mp, this.length) {
     _mp.putArrayLength(length);
   }
 
   @override
-  void putArray(int length, Function(ModelArrayEncoder) handler) =>
-    encodeArray(_mp, length, handler);
+  final int length;
+
+  @override
+  ModelArrayEncoder putArray(int length) =>
+    encodeArray(_mp, length);
 
   @override
   void putDate(DateTime value) =>
@@ -21,12 +24,12 @@ class ArrayEncoder implements ModelArrayEncoder {
     encodeInt(_mp, value);
   
   @override
-  void putMap(int length, Function(ModelMapEncoder) handler) =>
-    encodeMap(_mp, length, handler);
+  ModelMapEncoder putMap(int length) =>
+    encodeMap(_mp, length);
 
   @override
-  void putObject(Function(ModelObjectEncoder) handler) =>
-    encodeObject(_mp, handler);
+  ModelObjectEncoder putObject() =>
+    encodeObject(_mp);
   
   @override
   void putRef(ModelRef value) =>

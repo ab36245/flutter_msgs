@@ -5,25 +5,20 @@ import 'array.dart';
 import 'map.dart';
 import 'object.dart';
 
-void encodeArray(MsgPackEncoder mp, int length, Function(ModelArrayEncoder) handler) {
-  handler(ArrayEncoder(mp, length));
-}
+ModelArrayEncoder encodeArray(MsgPackEncoder mp, int length) =>
+  ArrayEncoder(mp, length);
 
-void encodeDate(MsgPackEncoder mp, DateTime value) {
+void encodeDate(MsgPackEncoder mp, DateTime value) =>
   mp.putTime(value);
-}
 
-void encodeInt(MsgPackEncoder mp, int value) {
+void encodeInt(MsgPackEncoder mp, int value) =>
   mp.putInt(value);
-}
 
-void encodeMap(MsgPackEncoder mp, int length, Function(ModelMapEncoder) handler) {
-  handler(MapEncoder(mp, length));
-}
+ModelMapEncoder encodeMap(MsgPackEncoder mp, int length) =>
+  MapEncoder(mp, length);
 
-void encodeObject(MsgPackEncoder mp, Function(ModelObjectEncoder) handler) {
-  handler(ObjectEncoder(mp));
-}
+ModelObjectEncoder encodeObject(MsgPackEncoder mp) =>
+  ObjectEncoder(mp);
 
 void encodeRef(MsgPackEncoder mp, ModelRef value) {
   mp.putString(value.id);

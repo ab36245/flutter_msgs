@@ -7,8 +7,8 @@ class ObjectEncoder implements ModelObjectEncoder {
   ObjectEncoder(this._mp);
 
   @override
-  void putArray(String name, int length, Function(ModelArrayEncoder) handler) =>
-    encodeArray(_mp, length, handler);
+  ModelArrayEncoder putArray(String name, int length) =>
+    encodeArray(_mp, length);
 
   @override
   void putDate(String name, DateTime value) =>
@@ -19,12 +19,12 @@ class ObjectEncoder implements ModelObjectEncoder {
     encodeInt(_mp, value);
   
   @override
-  void putMap(String name, int length, Function(ModelMapEncoder) handler) =>
-    encodeMap(_mp, length, handler);
+  ModelMapEncoder putMap(String name, int length) =>
+    encodeMap(_mp, length);
 
   @override
-  void putObject(String name, Function(ModelObjectEncoder) handler) =>
-    encodeObject(_mp, handler);
+  ModelObjectEncoder putObject(String name) =>
+    encodeObject(_mp);
   
   @override
   void putRef(String name, ModelRef value) =>

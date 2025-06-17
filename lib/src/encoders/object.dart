@@ -11,8 +11,12 @@ class ObjectEncoder implements ModelObjectEncoder {
     encodeArray(_mp, length);
 
   @override
-  void putDate(String name, DateTime value) =>
-    encodeDate(_mp, value);
+  void putBool(String name, bool value) =>
+    encodeBool(_mp, value);
+
+  @override
+  void putFloat(String name, double value) =>
+    encodeFloat(_mp, value);
 
   @override
   void putInt(String name, int value) =>
@@ -33,6 +37,10 @@ class ObjectEncoder implements ModelObjectEncoder {
   @override
   void putString(String name, String value) =>
     encodeString(_mp, value);
+
+  @override
+  void putTime(String name, DateTime value) =>
+    encodeTime(_mp, value);
 
   final MsgPackEncoder _mp;
 }

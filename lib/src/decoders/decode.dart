@@ -8,8 +8,11 @@ import 'object.dart';
 ArrayDecoder decodeArray(MsgPackDecoder mp) =>
   ArrayDecoder(mp);
 
-DateTime decodeDate(MsgPackDecoder mp) =>
-  mp.getTime();
+bool decodeBool(MsgPackDecoder mp) =>
+  mp.getBool();
+
+double decodeFloat(MsgPackDecoder mp) =>
+  mp.getFloat();
 
 int decodeInt(MsgPackDecoder mp) =>
   mp.getInt();
@@ -25,3 +28,6 @@ ModelRef decodeRef(MsgPackDecoder mp) =>
 
 String decodeString(MsgPackDecoder mp) =>
   mp.getString();
+
+DateTime decodeTime(MsgPackDecoder mp) =>
+  mp.getTime();

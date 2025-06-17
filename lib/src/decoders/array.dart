@@ -15,8 +15,12 @@ class ArrayDecoder implements ModelArrayDecoder {
     decodeArray(_mp);
   
   @override
-  DateTime getDate() =>
-    decodeDate(_mp);
+  bool getBool() =>
+    decodeBool(_mp);
+  
+  @override
+  double getFloat() =>
+    decodeFloat(_mp);
   
   @override
   int getInt() =>
@@ -37,6 +41,10 @@ class ArrayDecoder implements ModelArrayDecoder {
   @override
   String getString() =>
     decodeString(_mp);
+  
+  @override
+  DateTime getTime() =>
+    decodeTime(_mp);
 
   final MsgPackDecoder _mp;
 }

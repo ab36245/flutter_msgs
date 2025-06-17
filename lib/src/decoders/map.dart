@@ -15,8 +15,12 @@ class MapDecoder implements ModelMapDecoder {
     decodeArray(_mp);
   
   @override
-  DateTime getDate() =>
-    decodeDate(_mp);
+  bool getBool() =>
+    decodeBool(_mp);
+  
+  @override
+  double getFloat() =>
+    decodeFloat(_mp);
   
   @override
   int getInt() =>
@@ -41,6 +45,10 @@ class MapDecoder implements ModelMapDecoder {
   @override
   String getString() =>
     decodeString(_mp);
+
+  @override
+  DateTime getTime() =>
+    decodeTime(_mp);
 
   final MsgPackDecoder _mp;
 }

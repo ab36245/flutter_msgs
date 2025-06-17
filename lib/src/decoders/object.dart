@@ -11,8 +11,12 @@ class ObjectDecoder implements ModelObjectDecoder {
     decodeArray(_mp);
   
   @override
-  DateTime getDate(String name) =>
-    decodeDate(_mp);
+  bool getBool(String name) =>
+    decodeBool(_mp);
+  
+  @override
+  double getFloat(String name) =>
+    decodeFloat(_mp);
   
   @override
   int getInt(String name) =>
@@ -33,6 +37,10 @@ class ObjectDecoder implements ModelObjectDecoder {
   @override
   String getString(String name) =>
     decodeString(_mp);
+  
+  @override
+  DateTime getTime(String name) =>
+    decodeTime(_mp);
 
   final MsgPackDecoder _mp;
 }

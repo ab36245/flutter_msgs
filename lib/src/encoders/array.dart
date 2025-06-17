@@ -16,8 +16,12 @@ class ArrayEncoder implements ModelArrayEncoder {
     encodeArray(_mp, length);
 
   @override
-  void putDate(DateTime value) =>
-    encodeDate(_mp, value);
+  void putBool(bool value) =>
+    encodeBool(_mp, value);
+
+  @override
+  void putFloat(double value) =>
+    encodeFloat(_mp, value);
 
   @override
   void putInt(int value) =>
@@ -38,6 +42,10 @@ class ArrayEncoder implements ModelArrayEncoder {
   @override
   void putString(String value) =>
     encodeString(_mp, value);
+
+  @override
+  void putTime(DateTime value) =>
+    encodeTime(_mp, value);
 
   final MsgPackEncoder _mp;
 }

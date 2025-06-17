@@ -8,8 +8,11 @@ import 'object.dart';
 ModelArrayEncoder encodeArray(MsgPackEncoder mp, int length) =>
   ArrayEncoder(mp, length);
 
-void encodeDate(MsgPackEncoder mp, DateTime value) =>
-  mp.putTime(value);
+void encodeBool(MsgPackEncoder mp, bool value) =>
+  mp.putBool(value);
+
+void encodeFloat(MsgPackEncoder mp, double value) =>
+  mp.putFloat(value);
 
 void encodeInt(MsgPackEncoder mp, int value) =>
   mp.putInt(value);
@@ -20,10 +23,11 @@ ModelMapEncoder encodeMap(MsgPackEncoder mp, int length) =>
 ModelObjectEncoder encodeObject(MsgPackEncoder mp) =>
   ObjectEncoder(mp);
 
-void encodeRef(MsgPackEncoder mp, ModelRef value) {
+void encodeRef(MsgPackEncoder mp, ModelRef value) =>
   mp.putString(value.id);
-}
 
-void encodeString(MsgPackEncoder mp, String value) {
+void encodeString(MsgPackEncoder mp, String value) =>
   mp.putString(value);
-}
+
+void encodeTime(MsgPackEncoder mp, DateTime value) =>
+  mp.putTime(value);

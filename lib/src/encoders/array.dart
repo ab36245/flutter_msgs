@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_model/flutter_model.dart';
 import 'package:flutter_msgpack/flutter_msgpack.dart';
 
@@ -18,6 +20,10 @@ class ArrayEncoder implements ModelArrayEncoder {
   @override
   void putBool(bool value) =>
     encodeBool(_mp, value);
+
+  @override
+  void putBytes(Uint8List value) =>
+    encodeBytes(_mp, value);
 
   @override
   void putFloat(double value) =>

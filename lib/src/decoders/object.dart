@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_model/flutter_model.dart';
 import 'package:flutter_msgpack/flutter_msgpack.dart';
 
@@ -13,6 +15,10 @@ class ObjectDecoder implements ModelObjectDecoder {
   @override
   bool getBool(String name) =>
     decodeBool(_mp);
+  
+  @override
+  Uint8List getBytes(String name) =>
+    decodeBytes(_mp);
   
   @override
   double getFloat(String name) =>

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_model/flutter_model.dart';
 import 'package:flutter_msgpack/flutter_msgpack.dart';
 
@@ -10,6 +12,9 @@ ModelArrayEncoder encodeArray(MsgPackEncoder mp, int length) =>
 
 void encodeBool(MsgPackEncoder mp, bool value) =>
   mp.putBool(value);
+
+void encodeBytes(MsgPackEncoder mp, Uint8List value) =>
+  mp.putBytes(value);
 
 void encodeFloat(MsgPackEncoder mp, double value) =>
   mp.putFloat(value);

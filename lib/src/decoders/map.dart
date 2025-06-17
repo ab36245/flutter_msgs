@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_model/flutter_model.dart';
 import 'package:flutter_msgpack/flutter_msgpack.dart';
 
@@ -17,6 +19,10 @@ class MapDecoder implements ModelMapDecoder {
   @override
   bool getBool() =>
     decodeBool(_mp);
+  
+  @override
+  Uint8List getBytes() =>
+    decodeBytes(_mp);
   
   @override
   double getFloat() =>

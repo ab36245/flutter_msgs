@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter_model/flutter_model.dart';
 import 'package:flutter_msgpack/flutter_msgpack.dart';
 
